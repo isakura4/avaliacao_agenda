@@ -59,4 +59,28 @@ class Usuario
     $this->email = $email;
   }
 
+  public function salvarUsuario()
+  {
+    $sql = "INSERT INTO Usuario VALUES(:id, :usernome, :useremail , :userlogin, :senha)";
+    $conexao = Conexao::getConnection();
+    $stmt = $conexao->prepare($sql);
+    $stmt->bindValue(':id', $this->id);
+    $stmt->bindValue(':usernome', $this->nome);
+    $stmt->bindValue(':useremail', $this->email);
+    $stmt->bindValue(':userlogin', $this->login);
+    $stmt->bindValue(':senha', $this->senha);
+    $stmt->execute();
+    return 'Usuário salvo!';
+  }
+
+  public function listarContatos()
+  {
+    $conexao = Conexao::getConnection();
+    $sql = "SELECT * FROM Contato WHERE (UserID = :userid)";
+    $stmt = $conexao->prepare($sql);
+    $stmt->bindValue(':userid', $this->id);
+    $stmt->execute();
+    $contatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $contatos;
+  }
 }

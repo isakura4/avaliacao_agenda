@@ -70,4 +70,26 @@ class Contato
   {
     $this->telefones[] = $telefone;
   }
+
+  public function salvarContato()
+  {
+    $sql = 'INSERT INTO Contato VALUES (:id, :nome, :usuario)';
+    $conexao = Conexao::getConnection();
+    $stmt = $conexao->prepare($sql);
+    $stmt->bindValue(':id', $this->id);
+    $stmt->bindValue(':nome', $this->nome);
+    $stmt->bindValue(':usuario', $this->usuario);
+    $stmt->execute();
+    return 'Contato adicionado!';
+  }
+
+  public function excluirContato()
+  {
+    $sql = 'DELETE FROM Contato WHERE (ContatoID = :id)';
+    $conexao = Conexao::getConnection();
+    $stmt = $conexao->prepare($sql);
+    $stmt->bindValue(':id', $this->id);
+    $stmt->execute();
+    return "Contato $this->nome apagado!";
+  }
 }
