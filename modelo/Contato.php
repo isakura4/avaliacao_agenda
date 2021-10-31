@@ -46,13 +46,13 @@ class Contato
     return $this->emails;
   }
 
-  public function setEmails($emails) //vetor de emails
+  public function setEmails(Email $emails)
   {
     $this->emails = $emails;
   }
 
-  public function adicionarEmail($email)
-  { //adicionar unitário
+  public function adicionarEmail(Email $email)
+  {
     $this->emails[] = $email;
   }
 
@@ -61,12 +61,12 @@ class Contato
     return $this->telefones;
   }
 
-  public function setTelefones($telefones)
+  public function setTelefones(Telefone $telefones)
   {
     $this->telefones = $telefones;
   }
 
-  public function adicionarTelefone($telefone)
+  public function adicionarTelefone(Telefone $telefone)
   {
     $this->telefones[] = $telefone;
   }
@@ -91,5 +91,41 @@ class Contato
     $stmt->bindValue(':id', $this->id);
     $stmt->execute();
     return "Contato $this->nome apagado!";
+  }
+
+  public function salvarEmails()
+  {
+    foreach ($this->emails as $email) {
+      $email->salvarEmail();
+    }
+  }
+
+  public function salvarTelefones()
+  {
+    foreach ($this->telefones as $telefone) {
+      $telefone->salvarTelefone();
+    }
+  }
+
+  public function listarTelefones()
+  {
+    $sql = 'SELECT TelNumero FROM Telefone WHERE ContatoID=:id';
+    $conexao = Conexao::getConnection();
+    $stmt = $conexao->prepare($sql);
+    $stmt->bindValue(':id', $this->id);
+    $stmt->execute();
+    $telefones = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $telefones;
+  }
+
+  public function listarEmails()
+  {
+    $sql = 'SELECT EmailEnd FROM Email WHERE ContatoID=:id';
+    $conexao = Conexao::getConnection();
+    $stmt = $conexao->prepare($sql);
+    $stmt->bindValue(':id', $this->id);
+    $stmt->execute();
+    $emails = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $emails;
   }
 }
