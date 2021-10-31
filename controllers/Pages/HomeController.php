@@ -2,8 +2,8 @@
 
 class HomeController
 {
-    public static function getHome()
+    public static function getHome($usuario)
     {
-        return View::renderizar('pages/index', ['teste' => 'Funcionou!']);
+        return View::renderizar('pages/index', ['tabela' => UsuarioContatosController::getTabelaDeContatos($usuario)]);
     }
 }

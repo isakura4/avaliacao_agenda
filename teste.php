@@ -62,7 +62,7 @@ require_once "configuracao.php";
 // echo '</pre>';
 
 
-echo HomeController::getHome();
+echo HomeController::getHome(2);
 
 // // print_r(UsuarioController::getContatos(2));
 // echo '<table class="table">
@@ -78,4 +78,4 @@ echo HomeController::getHome();
 // UsuarioController::montarTabela(2);
 // echo '</tbody>';
 
-echo UsuarioContatosController::getTabelaDeContatos(2);
+// echo UsuarioContatosController::getTabelaDeContatos(2);
