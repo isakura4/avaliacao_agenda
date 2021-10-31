@@ -64,19 +64,18 @@ require_once "configuracao.php";
 
 echo HomeController::getHome();
 
-// print_r(UsuarioController::getContatos(2));
-echo '<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>';
-UsuarioController::montarTabela(2);
-echo '</tbody>';
-// foreach ($tabelaLinhas as $linha) {
-//     echo $linha;
-// }
+// // print_r(UsuarioController::getContatos(2));
+// echo '<table class="table">
+//   <thead>
+//     <tr>
+//       <th scope="col">#</th>
+//       <th scope="col">First</th>
+//       <th scope="col">Last</th>
+//       <th scope="col">Handle</th>
+//     </tr>
+//   </thead>
+//   <tbody>';
+// UsuarioController::montarTabela(2);
+// echo '</tbody>';
+
+echo UsuarioContatosController::getTabelaDeContatos(2);
